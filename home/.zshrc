@@ -9,7 +9,7 @@
 #  └┐┌┘├─┤├┬┘└─┐
 #   └┘ ┴ ┴┴└─└─┘
 export VISUAL="${EDITOR}"
-export EDITOR='geany'
+export EDITOR='vscodium'
 export BROWSER='firefox'
 export HISTORY_IGNORE="(ls|cd|pwd|exit|sudo reboot|history|cd -|cd ..)"
 export SUDO_PROMPT="Deploying root access for %u. Password pls: "
@@ -18,6 +18,20 @@ export BAT_THEME="base16"
 if [ -d "$HOME/.local/bin" ] ;
   then PATH="$HOME/.local/bin:$PATH"
 fi
+
+# python
+export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python"
+export VIRTUALENVWRAPPER_VIRTUALENV="/usr/bin/virtualenv"
+export WORKON_HOME="$HOME/Coding/python/.virtualenvs"
+export PROJECT_HOME="$HOME/Coding/python"
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+# wechat data dir
+export WECHAT_DATA_DIR="$HOME/.local/share/wechat_data"
+# QQ turn on autologin
+export QQ_FIX_MAC="1"
 
 #  ┬  ┌─┐┌─┐┌┬┐  ┌─┐┌┐┌┌─┐┬┌┐┌┌─┐
 #  │  │ │├─┤ ││  ├┤ ││││ ┬││││├┤
@@ -107,6 +121,8 @@ command_not_found_handler() {
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/nvm/init-nvm.sh
+source /usr/bin/virtualenvwrapper.sh
 
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -143,6 +159,7 @@ alias cat="bat --theme=base16"
 alias ls='eza --icons=always --color=always -a'
 alias ll='eza --icons=always --color=always -la'
 
+alias vi="nvim"
 #  ┌─┐┬ ┬┌┬┐┌─┐  ┌─┐┌┬┐┌─┐┬─┐┌┬┐
 #  ├─┤│ │ │ │ │  └─┐ │ ├─┤├┬┘ │
 #  ┴ ┴└─┘ ┴ └─┘  └─┘ ┴ ┴ ┴┴└─ ┴
