@@ -241,6 +241,14 @@ install_dependencies() {
         gh0stzk-icons-dracula gh0stzk-icons-glassy gh0stzk-icons-gruvbox-plus-dark
         gh0stzk-icons-hack gh0stzk-icons-luv gh0stzk-icons-sweet-rainbow
         gh0stzk-icons-tokyo-night gh0stzk-icons-vimix-white gh0stzk-icons-zafiro gh0stzk-icons-zafiro-purple
+        # my app
+        ark alsa-utils alsa-firmware autojump chromium ntfs-3g vscodium keepassxc telegram-desktop thunderbird-i18n-zh-cn kdeconnect fcitx5-im
+        fcitx5-chinese-addons fcitx5-pinyin-moegirl fcitx5-pinyin-zhwiki fcitx5-material-color pipewire pipewire-alsa pipewire-pulse pavucontrol
+        nvm python-virtualenv python-virtualenvwrapper calibre drawio-desktop-bin
+        picard qbittorrent-enhanced timeshift btop obs-studio scrcpy lxappearance udiskie firewalld
+        thunar-archive-plugin thunar-volman thunar-shares-plugin thunar-media-tags-plugin ffmpegthumbnailer
+        man-pages-zh_cn bluez bluez-utils meld refind ristretto ktimer android-tools
+         
     )
 
     # Handle ueberzug/ueberzugpp conflict
@@ -309,7 +317,7 @@ install_aur_dependencies() {
     }
 
     # AUR Package List
-    local aur_apps=(xqp xwinwrap-0.9-bin ttf-maple)
+    local aur_apps=(xqp xwinwrap-0.9-bin ttf-maple musicfox linuxqq-nt-bwrap wechat-universal-bwrap espanso-X11)
 
     echo -e "${BLD}${CBL}Checking for required AUR packages...${CNC}\n"
     sleep 2
@@ -468,7 +476,7 @@ backup_existing_config() {
     fi
 
     # Backup of individual files
-    local single_files=("$HOME/.zshrc" "$HOME/.gtkrc-2.0" "$HOME/.icons")
+    local single_files=("$HOME/.zshrc" "$HOME/.gtkrc-2.0" "$HOME/.xinitrc" "$HOME/.xprofile" "$HOME/.icons")
     for item in "${single_files[@]}"; do
         if [[ "$item" == *".icons" ]]; then
             backup_item d "$item" ".icons"
@@ -580,7 +588,7 @@ install_dotfiles() {
 	fi
 
     # Copy remaining files
-    local home_files=("$HOME/dotfiles/home/.zshrc" "$HOME/dotfiles/home/.gtkrc-2.0" "$HOME/dotfiles/home/.icons")
+    local home_files=("$HOME/dotfiles/home/.zshrc" "$HOME/dotfiles/home/.gtkrc-2.0" "$HOME/dotfiles/home/.xinitrc" "$HOME/dotfiles/home/.xprofile" "$HOME/dotfiles/home/.icons")
     for file in "${home_files[@]}"; do
         copy_files "$file" "$HOME/"
     done
@@ -629,6 +637,15 @@ configure_services() {
     else
         log_error "Failed to enable user MPD service"
         echo -en "${BLD}${CRE}Failed to activate user MPD service${CNC}\n\n"
+    fi
+
+    # Global Bluetooth Service
+    echo -en "${BLD}${CYE}Enabling Global bluetooth service...${CNC}\n"
+    if systemctl enable --now bluetooth.service >> "$ERROR_LOG" 2>&1; then
+        echo -en "${BLD}${CGR}Global Bluetooth service activated successfully${CNC}\n\n"
+    else
+        log_error "Failed to enable global Bluetooth service"
+        echo -en "${BLD}${CRE}Failed to activate global Bluetooth service${CNC}\n\n"
     fi
 
     # Virtual Machine Detection
