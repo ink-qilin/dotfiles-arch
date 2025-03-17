@@ -121,6 +121,7 @@ command_not_found_handler() {
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/autojump/autojump.zsh
 source /usr/share/nvm/init-nvm.sh
 source /usr/bin/virtualenvwrapper.sh
 
