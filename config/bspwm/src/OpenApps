@@ -83,7 +83,7 @@ case "$1" in
 		firefox
 		;;
 	--editor)
-		geany
+		vscodium
 		;;
 	--telegram)
 		telegram-desktop
